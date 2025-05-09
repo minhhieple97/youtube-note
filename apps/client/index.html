@@ -1,10 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>YouTube Notes Chrome Extension</title>
+    <script>
+      // Handle beforeinstallprompt event properly
+      let deferredPrompt;
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        // For Chrome Extensions, we typically don't need PWA installation
+        // functionality, so we can simply allow the default behavior
+        // Uncomment the following if you want to enable PWA installation
+        /*
+        // Prevent the default prompt from showing automatically
+        e.preventDefault();
+        
+        // Save the event for later use
+        deferredPrompt = e;
+        
+        // Show your custom install button or UI here if needed
+        // For example: document.getElementById('installButton').style.display = 'block';
+        */
+      });
+
+      // If you have a custom install button, you would use code like this:
+      /*
+      document.getElementById('installButton').addEventListener('click', async () => {
+        if (!deferredPrompt) {
+          return;
+        }
+        
+        // Show the install prompt
+        deferredPrompt.prompt();
+        
+        // Wait for the user to respond to the prompt
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User response to installation: ${outcome}`);
+        
+        // Clear the saved prompt
+        deferredPrompt = null;
+        
+        // Hide your install button
+        // document.getElementById('installButton').style.display = 'none';
+      });
+      */
+    </script>
   </head>
   <body>
     <div id="root"></div>

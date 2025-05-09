@@ -1,0 +1,530 @@
+/* YouTube Notes Extension Styles */
+:root {
+  --yt-notes-primary: #ff0000;
+  --yt-notes-primary-hover: #cc0000;
+  --yt-notes-text: #0f0f0f;
+  --yt-notes-text-secondary: #606060;
+  --yt-notes-bg: #ffffff;
+  --yt-notes-bg-secondary: #f9f9f9;
+  --yt-notes-border: #e5e5e5;
+  --yt-notes-shadow: rgba(0, 0, 0, 0.1);
+  --yt-notes-accent: #065fd4;
+  --yt-notes-accent-hover: #0356c2;
+  --yt-notes-danger: #cc0000;
+  --yt-notes-success: #2ba640;
+  --yt-notes-warning: #ff9100;
+  --yt-notes-spacing: 8px;
+  --yt-notes-radius: 4px;
+  --yt-notes-transition: all 0.2s ease;
+}
+
+/* Dark mode support */
+html[dark] {
+  --yt-notes-text: #ffffff;
+  --yt-notes-text-secondary: #aaaaaa;
+  --yt-notes-bg: #212121;
+  --yt-notes-bg-secondary: #181818;
+  --yt-notes-border: #303030;
+  --yt-notes-shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Container */
+#youtube-notes-container {
+  width: 100%;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  margin-bottom: 16px;
+}
+
+.youtube-notes-app {
+  background-color: var(--yt-notes-bg);
+  border: 1px solid var(--yt-notes-border);
+  border-radius: var(--yt-notes-radius);
+  overflow: hidden;
+  transition: var(--yt-notes-transition);
+  box-shadow: 0 1px 2px var(--yt-notes-shadow);
+}
+
+.youtube-notes-app.collapsed {
+  max-height: 48px;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(var(--yt-notes-spacing) + 4px) var(--yt-notes-spacing);
+  background-color: var(--yt-notes-bg-secondary);
+  border-bottom: 1px solid var(--yt-notes-border);
+}
+
+.app-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--yt-notes-text);
+}
+
+.app-actions {
+  display: flex;
+  gap: var(--yt-notes-spacing);
+}
+
+.action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--yt-notes-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--yt-notes-text-secondary);
+  transition: var(--yt-notes-transition);
+}
+
+.action-btn:hover {
+  color: var(--yt-notes-text);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+html[dark] .action-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* App Content */
+.app-content {
+  padding: var(--yt-notes-spacing);
+}
+
+/* Video Controls */
+.video-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: calc(var(--yt-notes-spacing) * 1.5);
+  padding: var(--yt-notes-spacing);
+  background-color: var(--yt-notes-bg-secondary);
+  border-radius: var(--yt-notes-radius);
+  border: 1px solid var(--yt-notes-border);
+}
+
+.timestamp-display {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  color: var(--yt-notes-text);
+  font-weight: 500;
+}
+
+.controls-actions {
+  display: flex;
+  gap: var(--yt-notes-spacing);
+}
+
+.control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: var(--yt-notes-radius);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--yt-notes-transition);
+  border: none;
+  background-color: transparent;
+  color: var(--yt-notes-text);
+}
+
+.control-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+html[dark] .control-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.control-btn.add-note-btn {
+  background-color: var(--yt-notes-accent);
+  color: white;
+}
+
+.control-btn.add-note-btn:hover {
+  background-color: var(--yt-notes-accent-hover);
+}
+
+/* Notes List */
+.notes-list {
+  margin-bottom: calc(var(--yt-notes-spacing) * 1.5);
+}
+
+.notes-list-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 var(--yt-notes-spacing) 0;
+  color: var(--yt-notes-text);
+}
+
+.notes-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.note-item {
+  display: flex;
+  flex-direction: column;
+  padding: var(--yt-notes-spacing);
+  border-bottom: 1px solid var(--yt-notes-border);
+  transition: var(--yt-notes-transition);
+}
+
+.note-item:last-child {
+  border-bottom: none;
+}
+
+.note-item:hover {
+  background-color: var(--yt-notes-bg-secondary);
+}
+
+.note-timestamp {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--yt-notes-accent);
+  margin-bottom: 4px;
+  cursor: pointer;
+  width: fit-content;
+  padding: 2px 6px;
+  border-radius: var(--yt-notes-radius);
+  transition: var(--yt-notes-transition);
+}
+
+.note-timestamp:hover {
+  background-color: rgba(6, 95, 212, 0.1);
+  text-decoration: underline;
+}
+
+.note-content {
+  margin-bottom: 8px;
+}
+
+.note-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--yt-notes-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.note-actions {
+  display: flex;
+  gap: var(--yt-notes-spacing);
+  align-self: flex-end;
+}
+
+.note-action-btn {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--yt-notes-radius);
+  cursor: pointer;
+  color: var(--yt-notes-text-secondary);
+  transition: var(--yt-notes-transition);
+}
+
+.note-action-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--yt-notes-text);
+}
+
+html[dark] .note-action-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.note-action-btn.delete-btn:hover {
+  color: var(--yt-notes-danger);
+}
+
+.note-action-btn.delete-btn.confirm {
+  color: white;
+  background-color: var(--yt-notes-danger);
+}
+
+.notes-empty-state {
+  padding: calc(var(--yt-notes-spacing) * 2);
+  text-align: center;
+  color: var(--yt-notes-text-secondary);
+  font-size: 14px;
+  border: 1px dashed var(--yt-notes-border);
+  border-radius: var(--yt-notes-radius);
+}
+
+/* Note Editor */
+.note-editor {
+  border: 1px solid var(--yt-notes-border);
+  border-radius: var(--yt-notes-radius);
+  overflow: hidden;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--yt-notes-spacing);
+  background-color: var(--yt-notes-bg-secondary);
+  border-bottom: 1px solid var(--yt-notes-border);
+}
+
+.timestamp-control {
+  display: flex;
+  align-items: center;
+}
+
+.timestamp-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: var(--yt-notes-radius);
+  background-color: rgba(0, 0, 0, 0.05);
+  border: none;
+  cursor: pointer;
+  color: var(--yt-notes-text);
+  transition: var(--yt-notes-transition);
+}
+
+html[dark] .timestamp-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.timestamp-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+html[dark] .timestamp-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.editor-actions {
+  display: flex;
+  gap: var(--yt-notes-spacing);
+}
+
+.editor-action-btn {
+  background: transparent;
+  border: none;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--yt-notes-radius);
+  cursor: pointer;
+  color: var(--yt-notes-text-secondary);
+  transition: var(--yt-notes-transition);
+}
+
+.editor-action-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--yt-notes-text);
+}
+
+html[dark] .editor-action-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.editor-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.editor-action-btn.save-btn {
+  color: var(--yt-notes-success);
+}
+
+.editor-action-btn.cancel-btn {
+  color: var(--yt-notes-danger);
+}
+
+.note-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: var(--yt-notes-spacing);
+  border: none;
+  resize: vertical;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--yt-notes-text);
+  background-color: var(--yt-notes-bg);
+  outline: none;
+}
+
+.editor-formatting {
+  display: flex;
+  gap: var(--yt-notes-spacing);
+  padding: var(--yt-notes-spacing);
+  border-top: 1px solid var(--yt-notes-border);
+  background-color: var(--yt-notes-bg-secondary);
+}
+
+.format-btn {
+  background: transparent;
+  border: 1px solid var(--yt-notes-border);
+  padding: 4px 8px;
+  border-radius: var(--yt-notes-radius);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--yt-notes-text);
+  transition: var(--yt-notes-transition);
+}
+
+.format-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+html[dark] .format-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.format-btn.bold-btn {
+  font-weight: 700;
+}
+
+.format-btn.italic-btn {
+  font-style: italic;
+}
+
+.format-btn.underline-btn {
+  text-decoration: underline;
+}
+
+.editor-footer {
+  padding: calc(var(--yt-notes-spacing) / 2) var(--yt-notes-spacing);
+  font-size: 11px;
+  color: var(--yt-notes-text-secondary);
+  text-align: right;
+  background-color: var(--yt-notes-bg-secondary);
+  border-top: 1px solid var(--yt-notes-border);
+}
+
+/* Add Note Button */
+.add-note-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 0;
+  border-radius: var(--yt-notes-radius);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--yt-notes-transition);
+  border: 1px solid var(--yt-notes-border);
+  background-color: var(--yt-notes-bg-secondary);
+  color: var(--yt-notes-text);
+}
+
+.add-note-btn:hover {
+  background-color: var(--yt-notes-bg);
+  box-shadow: 0 1px 3px var(--yt-notes-shadow);
+}
+
+/* Scrollbar styling */
+.notes-list ul::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notes-list ul::-webkit-scrollbar-track {
+  background: var(--yt-notes-bg-secondary);
+}
+
+.notes-list ul::-webkit-scrollbar-thumb {
+  background-color: var(--yt-notes-border);
+  border-radius: 6px;
+}
+
+.notes-list ul::-webkit-scrollbar-thumb:hover {
+  background-color: var(--yt-notes-text-secondary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+  .youtube-notes-app {
+    margin-bottom: 12px;
+  }
+}
+
+/* Error State */
+.youtube-notes-app.error-state {
+  border-color: var(--yt-notes-danger);
+}
+
+.context-error {
+  padding: calc(var(--yt-notes-spacing) * 2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--yt-notes-spacing) * 2);
+}
+
+.context-error h3 {
+  margin: 0;
+  color: var(--yt-notes-danger);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.context-error p {
+  margin: 0;
+  color: var(--yt-notes-text-secondary);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.reload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--yt-notes-accent);
+  color: white;
+  border: none;
+  border-radius: 18px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.reload-btn:hover {
+  background-color: var(--yt-notes-accent-hover);
+}

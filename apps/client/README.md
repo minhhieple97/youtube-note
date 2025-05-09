@@ -1,30 +1,56 @@
-# React + TypeScript + Vite
+# YouTube Notes Chrome Extension
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Chrome extension that enhances YouTube videos with time-stamped note-taking features. Take notes at specific timestamps while watching videos, and easily navigate between them.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Add notes at specific timestamps while watching YouTube videos
+- View, edit, and delete notes
+- Jump to specific timestamps by clicking on saved notes
+- Local storage for notes using Chrome's storage API
+- Dark mode compatibility
+- Keyboard shortcuts for quick note creation
+- Export/import notes for backup
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Development Mode
 
-- Configure the top-level `parserOptions` property like this:
+1. Clone or download this repository
+2. Open Chrome and navigate to `chrome://extensions/`
+3. Enable "Developer mode" in the top right
+4. Click "Load unpacked" and select the extension directory
+5. The extension should now be installed and active
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### Building for Production
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Install dependencies: `npm install`
+2. Build the extension: `npm run build`
+3. The built extension will be in the `dist` directory
+4. Follow steps 2-5 from the Development Mode instructions, but select the `dist` directory
+
+## Usage
+
+1. Navigate to any YouTube video
+2. Find the YouTube Notes panel below the video information
+3. Click "Add Note" or use Alt+N to create a note at the current timestamp
+4. Edit your note and press Ctrl+Enter to save
+5. Click on timestamps to jump to that point in the video
+6. Use the export/import buttons to backup your notes
+
+## Keyboard Shortcuts
+
+- Alt+N: Create a new note at the current timestamp
+- Ctrl+Enter: Save the current note
+- Esc: Cancel editing
+
+## Technologies Used
+
+- React
+- TypeScript
+- Chrome Extension API
+- Lucide Icons
+
+## License
+
+[MIT License](LICENSE)
