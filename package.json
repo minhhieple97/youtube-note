@@ -5,9 +5,10 @@
   "private": true,
   "packageManager": "pnpm@10.10.0",
   "scripts": {
-    "start:dev": "turbo run start:dev --no-daemon",
-    "build": "turbo run build",
-    "start": "pnpm run build && node apps/api/dist/main"
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "repository": {
     "type": "git",
