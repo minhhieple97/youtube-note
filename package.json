@@ -1,0 +1,24 @@
+{
+  "name": "youtube-note",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "packageManager": "pnpm@10.10.0",
+  "scripts": {
+    "start:dev": "turbo run start:dev --no-daemon",
+    "build": "turbo run build",
+    "start": "pnpm run build && node apps/api/dist/main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/minhhieple97/youtube-note.git"
+  },
+  "author": "minhhieple97",
+  "license": "ISC",
+  "devDependencies": {
+    "turbo": "^2.5.3"
+  },
+  "workspaces": [
+    "apps/*"
+  ]
+}
