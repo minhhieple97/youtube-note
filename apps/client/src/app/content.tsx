@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './components/App';
-import './index.css';
+import App from './App';
+import '../styles/index.css';
 
 // Function to inject our app into YouTube's page
 function injectApp() {
@@ -90,65 +90,6 @@ function addGlobalStyles() {
     .youtube-notes-app.collapsed {
       max-height: 40px;
     }
-    
-    .app-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 12px;
-      background-color: #f9f9f9;
-      border-bottom: 1px solid #e5e5e5;
-    }
-    
-    .app-title {
-      margin: 0;
-      font-size: 14px;
-      font-weight: 500;
-      color: #0d0d0d;
-    }
-    
-    .app-actions {
-      display: flex;
-      gap: 4px;
-    }
-    
-    .action-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-      color: #606060;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .action-btn:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-      color: #0d0d0d;
-    }
-    
-    .add-note-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      background-color: #065fd4;
-      color: white;
-      border: none;
-      border-radius: 18px;
-      padding: 8px 16px;
-      margin: 12px auto;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-    
-    .add-note-btn:hover {
-      background-color: #0356c2;
-    }
   `;
 
   document.head.appendChild(styleElement);
@@ -190,5 +131,4 @@ if (document.readyState === 'loading') {
 (window as any).youtubeNotesExtension = {
   injectApp,
 };
-
 export {};

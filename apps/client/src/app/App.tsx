@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { VideoControls } from './VideoControls';
-import { NotesList } from './NotesList';
-import { NoteEditor } from './NoteEditor';
-import { PlayerControlButton } from './PlayerControlButton';
-import { Note } from '../types';
-import { useVideoInfo } from '../hooks/useVideoInfo';
-import { useNotes } from '../hooks/useNotes';
-import { formatTimestamp } from '../utils/timeUtils';
 import { Plus, ArrowUp, ArrowDown, Download, Upload } from 'lucide-react';
+import { Note } from '../features/notes/types';
+import { VideoControls, NotesList, NoteEditor } from '../features/notes';
+import { useVideoInfo, useNotes, formatTimestamp } from '../features/notes';
+import { PlayerControlButton } from '../features/player';
 
 const App: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
