@@ -4,42 +4,69 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>YouTube Notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      :root {
+        --primary: #ff0000;
+        --primary-light: #ff000015;
+        --text-primary: #0f0f0f;
+        --text-secondary: #606060;
+        --bg-secondary: #f9f9f9;
+        --bg-key: #eaeaea;
+        --border-radius: 8px;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
       body {
-        font-family: 'Roboto', Arial, sans-serif;
+        font-family: 'Inter', sans-serif;
         margin: 0;
-        padding: 16px;
-        width: 320px;
-        color: #0f0f0f;
+        padding: 20px;
+        width: 340px;
+        color: var(--text-primary);
+        background-color: white;
+        line-height: 1.5;
       }
 
       .popup-container {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 20px;
       }
 
       header {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 12px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
       }
 
       h1 {
         font-size: 18px;
         margin: 0;
-        font-weight: 500;
+        font-weight: 600;
+        letter-spacing: -0.01em;
       }
 
       .logo {
-        width: 24px;
-        height: 24px;
-        color: #ff0000;
+        width: 28px;
+        height: 28px;
+        color: var(--primary);
+        filter: drop-shadow(0 1px 2px rgba(255, 0, 0, 0.2));
       }
 
       .message {
         font-size: 14px;
-        line-height: 1.5;
+      }
+
+      .message p {
+        margin-top: 0;
+        margin-bottom: 12px;
       }
 
       .instruction-list {
@@ -48,20 +75,27 @@
       }
 
       .instruction-list li {
-        margin-bottom: 8px;
-        font-size: 13px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        position: relative;
+      }
+
+      .instruction-list li::marker {
+        color: var(--primary);
       }
 
       .shortcut-container {
-        background-color: #f9f9f9;
-        border-radius: 4px;
-        padding: 12px;
+        background-color: var(--bg-secondary);
+        border-radius: var(--border-radius);
+        padding: 16px;
+        box-shadow: var(--shadow);
       }
 
       .shortcut-title {
-        font-size: 14px;
-        font-weight: 500;
-        margin: 0 0 8px 0;
+        font-size: 15px;
+        font-weight: 600;
+        margin: 0 0 12px 0;
+        color: var(--text-primary);
       }
 
       .shortcut-list {
@@ -73,8 +107,9 @@
       .shortcut-item {
         display: flex;
         justify-content: space-between;
-        font-size: 13px;
-        margin-bottom: 8px;
+        align-items: center;
+        font-size: 14px;
+        margin-bottom: 10px;
       }
 
       .shortcut-item:last-child {
@@ -82,18 +117,28 @@
       }
 
       .key {
-        font-family: 'Roboto Mono', monospace;
-        background-color: #e5e5e5;
-        padding: 2px 6px;
-        border-radius: 3px;
+        font-family: 'SF Mono', 'Roboto Mono', monospace;
+        background-color: var(--bg-key);
+        padding: 3px 8px;
+        border-radius: 4px;
         font-size: 12px;
+        font-weight: 500;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       }
 
       footer {
         font-size: 12px;
-        color: #606060;
+        color: var(--text-secondary);
         text-align: center;
         margin-top: 8px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .heart {
+        color: var(--primary);
+        display: inline-block;
+        transform: translateY(1px);
       }
     </style>
   </head>
@@ -144,7 +189,7 @@
         </ul>
       </div>
 
-      <footer>Made with ♥ for YouTube viewers</footer>
+      <footer>Made with <span class="heart">♥</span> for YouTube viewers</footer>
     </div>
   </body>
 </html>
