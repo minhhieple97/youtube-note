@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Note, NotesStorage } from '../types';
 
+// Helper to check if Chrome storage API is available
+const isChromeStorageAvailable = () => {
+  return typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local;
+};
+
 export const useNotes = (videoId: string) => {
   const [notes, setNotes] = useState<Note[]>([]);
 
@@ -10,10 +15,19 @@ export const useNotes = (videoId: string) => {
 
     const loadNotes = async () => {
       try {
-        const result = await chrome.storage.local.get(['youtubeNotes']);
-        const allNotes: NotesStorage = result.youtubeNotes || {};
-        const videoNotes = allNotes[videoId] || [];
-        setNotes(videoNotes);
+        if (isChromeStorageAvailable()) {
+          // Chrome extension environment
+          const result = await chrome.storage.local.get(['youtubeNotes']);
+          const allNotes: NotesStorage = result.youtubeNotes || {};
+          const videoNotes = allNotes[videoId] || [];
+          setNotes(videoNotes);
+        } else {
+          // Development/browser environment
+          const storedData = localStorage.getItem('youtubeNotes');
+          const allNotes: NotesStorage = storedData ? JSON.parse(storedData) : {};
+          const videoNotes = allNotes[videoId] || [];
+          setNotes(videoNotes);
+        }
       } catch (error) {
         console.error('Error loading notes:', error);
         setNotes([]);
@@ -28,15 +42,27 @@ export const useNotes = (videoId: string) => {
     if (!videoId) return;
 
     try {
-      // Get current storage
-      const result = await chrome.storage.local.get(['youtubeNotes']);
-      const allNotes: NotesStorage = result.youtubeNotes || {};
+      if (isChromeStorageAvailable()) {
+        // Chrome extension environment
+        const result = await chrome.storage.local.get(['youtubeNotes']);
+        const allNotes: NotesStorage = result.youtubeNotes || {};
 
-      // Update notes for this video
-      allNotes[videoId] = updatedNotes;
+        // Update notes for this video
+        allNotes[videoId] = updatedNotes;
 
-      // Save back to storage
-      await chrome.storage.local.set({ youtubeNotes: allNotes });
+        // Save back to storage
+        await chrome.storage.local.set({ youtubeNotes: allNotes });
+      } else {
+        // Development/browser environment
+        const storedData = localStorage.getItem('youtubeNotes');
+        const allNotes: NotesStorage = storedData ? JSON.parse(storedData) : {};
+
+        // Update notes for this video
+        allNotes[videoId] = updatedNotes;
+
+        // Save back to localStorage
+        localStorage.setItem('youtubeNotes', JSON.stringify(allNotes));
+      }
 
       // Update local state
       setNotes(updatedNotes);
