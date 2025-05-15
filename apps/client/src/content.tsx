@@ -3,46 +3,57 @@ import { createRoot } from 'react-dom/client';
 import App from './components/App';
 import './index.css';
 
-// Function to inject our app into YouTube's page
 function injectApp() {
-  // Check if we're on a YouTube video page
   if (!window.location.pathname.includes('/watch')) {
     return;
   }
 
-  // Remove existing app if there is one
   const existingApp = document.getElementById('youtube-notes-container');
   if (existingApp) {
     existingApp.remove();
   }
 
-  // Create container for our app
   const container = document.createElement('div');
   container.id = 'youtube-notes-container';
 
-  // Find YouTube's secondary column (sidebar)
-  const secondaryColumn = document.querySelector('#secondary');
+  const findAndInjectIntoDOM = () => {
+    const secondaryColumn = document.querySelector('#secondary, #secondary-inner');
+    if (secondaryColumn) {
+      secondaryColumn.prepend(container);
 
-  if (secondaryColumn) {
-    // Insert our container at the top of the secondary column
-    secondaryColumn.prepend(container);
+      addGlobalStyles();
 
-    // Add global styles for our app
-    addGlobalStyles();
+      const root = createRoot(container);
+      root.render(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>,
+      );
+      return true;
+    }
+    return false;
+  };
 
-    // Render our React app into the container
-    const root = createRoot(container);
-    root.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>,
-    );
+  if (!findAndInjectIntoDOM()) {
+    const retryTimes = [500, 1000, 2000, 3000];
+    let attemptCount = 0;
+
+    const retryInjection = () => {
+      if (attemptCount < retryTimes.length) {
+        setTimeout(() => {
+          if (!findAndInjectIntoDOM()) {
+            attemptCount++;
+            retryInjection();
+          }
+        }, retryTimes[attemptCount]);
+      }
+    };
+
+    retryInjection();
   }
 }
 
-// Add global styles for our extension
 function addGlobalStyles() {
-  // Remove existing styles if any
   const existingStyles = document.getElementById('youtube-notes-global-styles');
   if (existingStyles) {
     existingStyles.remove();
@@ -159,12 +170,21 @@ function setupNavigationListener() {
   // YouTube uses History API for navigation
   let lastUrl = window.location.href;
 
-  // Create a new observer for URL changes
+  // Monitor URL changes directly
+  const checkForUrlChanges = () => {
+    if (lastUrl !== window.location.href) {
+      lastUrl = window.location.href;
+      // Wait a bit for YouTube to update its DOM
+      setTimeout(injectApp, 1000);
+    }
+    requestAnimationFrame(checkForUrlChanges);
+  };
+  requestAnimationFrame(checkForUrlChanges);
+
+  // Also watch for DOM changes as a backup method
   const observer = new MutationObserver(() => {
     if (lastUrl !== window.location.href) {
       lastUrl = window.location.href;
-
-      // Re-inject the app with a slight delay to ensure page is loaded
       setTimeout(injectApp, 1000);
     }
   });
